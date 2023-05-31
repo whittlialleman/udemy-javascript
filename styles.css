@@ -1,0 +1,55 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: lightgray;
+    font-family: sans-serif;
+    font-size: 20px;
+    padding: 50px;
+  }
+
+h1 {
+    font-size: 50px;
+    margin-bottom: 25px;
+}
+
+h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+p {
+    margin-bottom: 20px;
+}
+
+.first {
+    color: orangered
+}
+
+#your-name {
+    background-color: gray;
+    border: 5px solid #000;
+    width: 400px;
+    padding: 25px;
+    margin-top: 30px;
+}
+
+input, button {
+    padding: 10px;
+    font-size: 16px;
+}
+
+a {
+    background-color: rgb(239, 239, 182);
+}
+
+#your-name h2 {
+    color: rgb(63, 86, 17);
+}
+
+#my-image {
+    width: 400px;
+}
