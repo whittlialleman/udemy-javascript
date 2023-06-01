@@ -35,7 +35,7 @@ const firstName = 'Whip';
 calcAge(1996);
 //console.log(age); This doesn't work here because age is defined in the function, so it is not available here
 //printAge(); This is also not available here as it is only available in the first function
-*/
+
 
 ////////////////////////////////////
 //Hoisting and TDZ in practice
@@ -83,3 +83,40 @@ const z = 3;
 console.log(x === window.x); //Because it crated a window property, this shows true
 console.log(y === window.y); //Because it did not create a window property, this shows false
 console.log(z === window.z); //Because it did not create a window property, this shows false
+*/
+
+//////////////////////////////////////
+//This keyword in practice
+
+console.log(this); //This will show the window object as it's referring to the global element
+
+const calcAge = function(birthYear) {
+    console.log(2037 - birthYear);
+    console.log(this);
+};
+calcAge(1997); //This shows undefined because simple function calls show undefined in strict mode, which we are using
+
+const calcAgeArrow = birthYear => {
+    console.log(2037 - birthYear);
+    console.log(this);
+};
+calcAgeArrow(1985); //This shows the window object because the arrow function does not get it's own this keyword, so it uses the this   keyword of it's parent function, which is the global scope in this case
+
+const whip = {
+    year: 1997,
+    calcAge: function () {
+        console.log(this);
+        console.log(2037 - this.year);
+    }
+}
+whip.calcAge(); //This shows the whip object because the this keyword in a method call shows the object that is calling the method
+
+const matilda = {
+    year: 2017,
+};
+
+matilda.calcAge = whip.calcAge; //Called method borrowing - the window will show calcAge in the matilda object now
+matilda.calcAge(); //The this keyword in the jonas object will point to matilda because matilda is the object who called the method
+
+const f = whip.calcAge;
+f(); //this is a regular function call, so there is no owner - the this becomes undefined as it is determined based on the owner/caller
