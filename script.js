@@ -34,19 +34,69 @@ const restaurant = {
   orderDelivery: function({starterIndex = 1, mainIndex = 0, time = '20:00', address}) {
     console.log(`Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}.`);
   },
+
+  orderPasta: function (ing1, ing2, ing3) {
+    console.log(`Here is your delivious pasta with ${ing1}, ${ing2}, and ${ing3}.`);
+  }
 };
 
-restaurant.orderDelivery({
-  time: '22:30',
-  address: 'Via del Sole, 21',
-  mainIndex: 2,
-  starterIndex: 2,
-});
+////////////////////////////////////////
+//The Spread Operator
 
-restaurant.orderDelivery({
-  address: 'Via del Sole, 21',
-  starterIndex: 1,
-})
+const arr = [7,8,9];
+const badNewArr = [1,2, arr[0], arr[1], arr[2]]; //This is the old, longer way to add values to the array
+console.log(badNewArr);
+
+const newArr = [1,2, ...arr]; //This is the new, faster way to add values to the array
+console.log(newArr);
+
+console.log(...newArr); //Logs the element of the array individually
+
+const newMenu = [...restaurant.mainMenu, "Gnocci"]; //This creates a new array
+console.log(newMenu);
+
+//copy array
+const mainMenuCopy = [...restaurant.mainMenu]; //creates a shallow copy of the array
+
+//Join arrays together
+const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+console.log(menu);
+
+//Iterables are arrays, strings, maps, sets, but NOT objects
+const str = 'whip';
+const letters = [...str, '', 'A.'];
+console.log(letters);
+console.log(...str);
+//console.log(`${...str} Alleman`); //this doesn't work as it can't put in multiple values
+
+//Real world example
+// const ingredients = //[prompt('Let\'s make pasta! Ingredient 1?'), prompt('Ingredient 2?'), prompt('Ingredient 3?')];
+// console.log(ingredients);
+
+// //restaurant.orderPasta(ingredients[0], ingredients[1], ingredients[2]); This is the old way
+// restaurant.orderPasta(...ingredients);
+
+//Objects
+const newRestaurant = {foundedIn: 1998, ...restaurant, founder: 'Guiseppe',};
+console.log(newRestaurant);
+
+const restaurantCopy = {...restaurant};
+restaurantCopy.name = 'Ristorante Roma';
+console.log(restaurantCopy.name);
+console.log(restaurant.name);
+
+/*
+// restaurant.orderDelivery({
+//   time: '22:30',
+//   address: 'Via del Sole, 21',
+//   mainIndex: 2,
+//   starterIndex: 2,
+// });
+
+// restaurant.orderDelivery({
+//   address: 'Via del Sole, 21',
+//   starterIndex: 1,
+// })
 
 // const arr = [2,3,4];
 // const a = arr[0];
@@ -79,27 +129,28 @@ restaurant.orderDelivery({
 // const [p=1, q=1, r=1] = [8, 9];
 // console.log(p,q,r);
 
-///////////////////////////////////////////
-//Destructuring Objects
+// ///////////////////////////////////////////
+// //Destructuring Objects
 
-const {name, openingHours, categories} = restaurant;
-console.log(name, openingHours, categories);
+// const {name, openingHours, categories} = restaurant;
+// console.log(name, openingHours, categories);
 
-const {name: restaurantName, openingHours: hours, categories: tags} = restaurant;
-console.log(restaurantName, hours, tags);
+// const {name: restaurantName, openingHours: hours, categories: tags} = restaurant;
+// console.log(restaurantName, hours, tags);
 
-//Default values
-const {menu = [], starterMenu: starters = []} = restaurant;
-console.log(menu, starters);
+// //Default values
+// const {menu = [], starterMenu: starters = []} = restaurant;
+// console.log(menu, starters);
 
-//Mutating variables
-let a = 111;
-let b = 999;
-const obj = {a: 23, b: 7, c: 14};
+// //Mutating variables
+// let a = 111;
+// let b = 999;
+// const obj = {a: 23, b: 7, c: 14};
 
-({a, b} = obj); //Have to put this in parentheses or else JS won't let it work because it thinks the curly braces are a code block and you can't set a code block equal to a variable
-console.log(a,b);
+// ({a, b} = obj); //Have to put this in parentheses or else JS won't let it work because it thinks the curly braces are a code block and you can't set a code block equal to a variable
+// console.log(a,b);
 
-//Nested objects
-const {fri: {open, close}} = openingHours;
-console.log(open, close);
+// //Nested objects
+// const {fri: {open, close}} = openingHours;
+// console.log(open, close);
+*/
