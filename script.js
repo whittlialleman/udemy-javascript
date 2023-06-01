@@ -83,7 +83,6 @@ const z = 3;
 console.log(x === window.x); //Because it crated a window property, this shows true
 console.log(y === window.y); //Because it did not create a window property, this shows false
 console.log(z === window.z); //Because it did not create a window property, this shows false
-*/
 
 //////////////////////////////////////
 //This keyword in practice
@@ -120,3 +119,54 @@ matilda.calcAge(); //The this keyword in the jonas object will point to matilda 
 
 const f = whip.calcAge;
 f(); //this is a regular function call, so there is no owner - the this becomes undefined as it is determined based on the owner/caller
+*/
+
+//////////////////////////////////////////
+//Regular Functions vs. Arrow Functions
+
+//var firstName = 'Matilda';
+
+const whip = {
+    firstName: 'Whip',
+    year: 1997,
+    calcAge: function () {
+        //console.log(this);
+        console.log(2037 - this.year);
+
+        //Solution one - set this equal to self to preserve the this keyword, and use self
+        // const self = this;
+        // const isMillenial = function() {
+        //     console.log(self);
+        //     console.log(self.year >= 1981 && self.year <= 1997);
+        //     //console.log(this.year >= 1981 && this.year <= 1997);
+        // }
+
+        //Solution 2 - use an arrow function as it inherits the this keyword from its parent
+        const isMillenial = () => {
+            console.log(this);
+            console.log(this.year >= 1981 && this.year <= 1997);
+        };
+
+        isMillenial();
+    },
+
+    greet: () => console.log(`Hey ${this.firstName}`),
+};
+
+whip.greet(); //Log shows "hey undefined" because an arrow functions do not have the this keyword, so it defaults to the parent scope which is the global scope
+//console.log(this.firstName); //without the 'var firstName = 'Matilda'', this shows undefined - we get undefined when we try to access a property that doesn't exist - because var variables create properties on the window, this changes to 'Matilda' when the var is there
+whip.calcAge();
+
+//Arguments keyword
+const addExpr = function(a,b) {
+    console.log(arguments);
+    return a + b;
+};
+addExpr(2,5);
+
+var addArrow = (a, b) => { //Arguments keyword does not exist in arrow functions
+    console.log(arguments);
+    return a + b;
+};
+addArrow(2,5,8);
+
