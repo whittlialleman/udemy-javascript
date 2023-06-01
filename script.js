@@ -168,7 +168,6 @@ var addArrow = (a, b) => { //Arguments keyword does not exist in arrow functions
     return a + b;
 };
 addArrow(2,5,8);
-*/
 
 //////////////////////////////////////////
 //Primitives vs. Objects (Primitive vs. Reference Types)
@@ -189,3 +188,45 @@ friend.age = 27;
 
 console.log('Friend:', friend); //Both of these logs show the age as 27
 console.log('Me:', me);
+*/
+
+//////////////////////////////////////////
+//Primitives vs. Objects in Practice
+
+//Primitive types
+let lastName = 'Alleman';
+let oldLastName = lastName;
+lastName = 'Garr';
+console.log(lastName, oldLastName);
+
+//Reference types
+const jessica = {
+    firstName: 'Jessica',
+    lastName: 'Williams',
+    age: 27,
+};
+
+const marriedJessica = jessica; //This sets the memory addresses equal in the heap
+marriedJessica.lastName = 'Davis'; //Because both objects have the same address, updating one will update both
+console.log('Before marriage:', jessica); //both of these show Davis as the last name
+console.log('After marriage', marriedJessica); //both of these show Davis as the last name
+
+//marriedJessica = {}; because marriedJessica is a constant, we cannot reassign it to a new object - all we can do is update the properties stored in the heap
+
+//Copying objects
+const jessica2 = {
+    firstName: 'Jessica',
+    lastName: 'Williams',
+    age: 27,
+    family: ['Alice', 'Bob']
+};
+
+const jessicaCopy = Object.assign({}, jessica2); //This creates a shallow copy of the object in the heap
+jessicaCopy.lastName = 'Davis'; //This changes the value only on the shallow copy
+console.log('Before marriage:', jessica2); //This shows Williams
+console.log('After marriage', jessicaCopy); //This shows Davis
+
+jessicaCopy.family.push('Mary'); //This is trying to change an object in an object, which a shallow copy cannot do
+jessicaCopy.family.push('John');
+console.log('Before marriage:', jessica2); //These both show four family members instead of two for jessica2 and four for jessicaCopy
+console.log('After marriage', jessicaCopy);
