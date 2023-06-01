@@ -119,7 +119,6 @@ matilda.calcAge(); //The this keyword in the jonas object will point to matilda 
 
 const f = whip.calcAge;
 f(); //this is a regular function call, so there is no owner - the this becomes undefined as it is determined based on the owner/caller
-*/
 
 //////////////////////////////////////////
 //Regular Functions vs. Arrow Functions
@@ -169,4 +168,24 @@ var addArrow = (a, b) => { //Arguments keyword does not exist in arrow functions
     return a + b;
 };
 addArrow(2,5,8);
+*/
 
+//////////////////////////////////////////
+//Primitives vs. Objects (Primitive vs. Reference Types)
+
+let age = 25;
+let oldAge = age;
+age = 26;
+console.log(age); //This shows 26
+console.log(oldAge); //This shows 25 because age was 25 when oldAge was set
+
+const me = {
+    name: 'Whip',
+    age: 25,
+};
+
+const friend = me;
+friend.age = 27;
+
+console.log('Friend:', friend); //Both of these logs show the age as 27
+console.log('Me:', me);
