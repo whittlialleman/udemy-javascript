@@ -45,6 +45,23 @@ const restaurant = {
   },
 };
 
+////////////////////////////////////
+//Logical Assignment Operators
+
+
+
+/*
+////////////////////////////////////
+//Nullish Coalescing Operator
+
+restaurant.numGuests = 0;
+const guests = restaurant.numGuests || 10;
+console.log(guests);
+
+//nullish values are null and undefined (NOT 0 or '')
+const guestCorrect = restaurant.numGuests ?? 10; //This shows 0 as it accepts 0 as a 'truthy' value here
+console.log(guestCorrect);
+
 ///////////////////////////////////////
 //Short Circuiting
 
@@ -76,7 +93,6 @@ if (restaurant.orderPizza) {
 
 restaurant.orderPizza && restaurant.orderPizza('mushrooms', 'spinach'); //This is a shorter way to write the if statement from above - if orderPizza exists, it will be truthy, and it will move on to the next value
 
-/*
 //////////////////////////////////////
 //Rest Pattern and Parameters
 
