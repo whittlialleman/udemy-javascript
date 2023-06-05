@@ -53,6 +53,32 @@ const restaurant = {
 };
 
 ////////////////////////////////////////
+//Looping Objects: Object Keys, Values, and Entries
+
+//Property NAMES
+const properties = Object.keys(openingHours);
+console.log(properties);
+
+let openStr = `We are open on ${properties.length} days: `
+for(const day of properties) {
+  openStr += `${day}, `;
+}
+console.log(openStr);
+
+//Property VALUES
+const values = Object.values(openingHours);
+console.log(values);
+
+//Entire object
+const entries = Object.entries(openingHours);
+//console.log(entries);
+
+for(const [key, {open, close}] of entries) {
+  console.log(`On ${key} we open at ${open} and close at ${close}`);
+};
+
+/*
+////////////////////////////////////////
 //Optional Chaining
 
 if(restaurant.openingHours.mon) {
@@ -81,7 +107,6 @@ const users = [
 
 console.log(users[0]?.name ?? 'User array empty'); //This shows Whip because users[0] exists
 
-/*
 /////////////////////////////////////////
 //The for-of Loop
 
