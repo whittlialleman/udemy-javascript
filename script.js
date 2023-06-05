@@ -52,6 +52,35 @@ const restaurant = {
   },
 };
 
+////////////////////////////////////////
+//Optional Chaining
+
+if(restaurant.openingHours.mon) {
+  console.log(restaurant.openingHours.mon.open);
+};
+
+//WITH optional chaining
+console.log(restaurant.openingHours.mon?.open); //This will only run if mon exists - otherwise it will show undefined
+console.log(restaurant.openingHours?.mon?.open); //this checks to see if openingHours and mon exist
+
+const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+for(const day of days) {
+  const open = restaurant.openingHours[day]?.open ?? 'closed';
+  console.log(`On ${day}, we open at ${open}`);
+};
+
+//Methods
+console.log(restaurant.order?.(0,1) ?? 'Method does not exist'); //this shows the expected order because restaurant.order exists
+console.log(restaurant.orderRisotto?.(0,1) ?? 'Method does not exist'); //This shows the string because orderRisotto does not exist
+
+//Arrays
+const users = [
+  {name: 'Whip',
+  email: 'hello@whip.com'}
+];
+
+console.log(users[0]?.name ?? 'User array empty'); //This shows Whip because users[0] exists
+
 /*
 /////////////////////////////////////////
 //The for-of Loop
