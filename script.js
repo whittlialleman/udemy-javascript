@@ -48,7 +48,37 @@ const restaurant = {
 ////////////////////////////////////
 //Logical Assignment Operators
 
+const rest1 = {
+  name: 'Capri',
+  //numGuests: 20,
+  numGuests: 0,
+};
 
+const rest2 = {
+  name: 'La Piazza',
+  owner: 'Giovanni Rossi',
+};
+
+//OR assignment operator
+//rest1.numGuests = rest1.numGuests || 10;
+//rest2.numGuests = rest2.numGuests || 10;
+//rest1.numGuests ||= 10; //This is a more concise way of writing the two lines above, but won't work if the value is 0
+//rest2.numGuests ||= 10;
+
+//nullish assignment operator
+rest1.numGuests ??= 10; //This works because it allows 0 to be a truthy value
+rest2.numGuests ??= 10;
+
+//AND assignment operator
+rest2.owner = rest2.owner && '<ANONYMOUS>'; //This sets the owner name equal to the string because the first value is truthy and it went to the next value
+rest1.owner = rest1.owner && '<ANONYMOUS>'; //This shows the owner as undefined because the first value is falsy
+
+rest1.owner &&= '<ANONYMOUS>'; //This is a shorter way of writing the two lines above, but it doesn't show the owner as undefined which is better
+rest2.owner &&= '<ANONYMOUS>';
+
+
+console.log(rest1);
+console.log(rest2);
 
 /*
 ////////////////////////////////////
