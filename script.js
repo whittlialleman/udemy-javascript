@@ -45,6 +45,21 @@ const restaurant = {
   },
 };
 
+/////////////////////////////////////////
+//The for-of Loop
+
+const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+
+for (const item of menu) {
+  console.log(item);
+};
+
+for (const [i, el] of menu.entries()) {
+  console.log(`${i + 1}: ${el}`);
+};
+
+//console.log([...menu.entries()]);
+
 /*
 ////////////////////////////////////
 //Logical Assignment Operators
@@ -273,7 +288,6 @@ console.log(restaurant.name);
 // //Nested objects
 // const {fri: {open, close}} = openingHours;
 // console.log(open, close);
-*/
 
 ////////////////////////////////////////
 //Coding Challenge 1
@@ -343,3 +357,4 @@ printGoals('Lewandowski', 'Kimmich');
 printGoals(...game.scored);
 
 team1 < team2 && console.log('Team 1 is more likely to win');
+*/
