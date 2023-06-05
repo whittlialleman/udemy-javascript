@@ -45,6 +45,38 @@ const restaurant = {
   },
 };
 
+///////////////////////////////////////
+//Short Circuiting
+
+console.log('--------OR-----------')
+//Use any data type, return any data type, and they use short-circuiting
+console.log(3 || 'Whip'); //This shows 3 because 3 is truthy
+console.log('' || 'Whip'); //This shows Whip because an empty string is falsy
+console.log(true || 0); //This shows true because true is truthy
+console.log(undefined || null); //This shows null because undefined is falsy
+console.log(undefined || 0 || 'Hello' || 23 || null); //This shows 'Hello' because it's the first truthy value
+
+restaurant.numGuests = 23;
+const guests1 = restaurant.numGuests ? restaurant.numGuests : 10;
+console.log(guests1); //This shows 23 because we set the value above
+
+const guests2 = restaurant.numGuests || 10;
+console.log(guests2); //This also shows 23 because it is set above
+
+console.log('--------AND-----------')
+console.log(0 && 'Whip'); //This shows 0 because its falsy
+console.log(7 && 'Whip'); //This returns Whip because 7 is true and it moves on
+
+console.log('Hello' && 23 && null && 'Whip'); //This returns null because that is the first falsy value
+
+//Practical example
+if (restaurant.orderPizza) {
+  restaurant.orderPizza('mushrooms', 'spinach');
+}
+
+restaurant.orderPizza && restaurant.orderPizza('mushrooms', 'spinach'); //This is a shorter way to write the if statement from above - if orderPizza exists, it will be truthy, and it will move on to the next value
+
+/*
 //////////////////////////////////////
 //Rest Pattern and Parameters
 
@@ -83,7 +115,6 @@ add(...x);
 restaurant.orderPizza('mushrooms', 'onion', 'olives', 'spinach');
 restaurant.orderPizza('mushrooms');
 
-/*
 ////////////////////////////////////////
 //The Spread Operator
 
