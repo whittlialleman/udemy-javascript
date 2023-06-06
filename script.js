@@ -52,6 +52,48 @@ const restaurant = {
   },
 };
 
+/////////////////////////////////////////
+//Working with Strings - Part 1
+
+const airline = 'TAP Air Portugal';
+const plane = 'A320';
+
+console.log(plane[0]); //Log shows A
+console.log(plane[1]); //Log shows 3
+console.log(plane[2]); //Log shows 2
+console.log('B737'[0]); //Log shows B
+console.log(airline.length); //Log shows 16
+console.log('B737'.length); //Log shows 4
+
+console.log(airline.indexOf('r')); //Log shows 6 - in the 7th spot
+console.log(airline.lastIndexOf('r')); //Log shows 10 - last r in the 11th spot
+console.log(airline.indexOf('Portugal')); //Log shows 8 - starts in the 9th spot - this is case sensitive
+
+console.log(airline.slice(4)); //This cuts the string before the 5th spot so log shows 'Air Portugal' - this does not change the string, only shows the sliced part in the log
+
+console.log(airline.slice(4, 7)); //This logs the string between the 5th and 8th spot - 8th is not included in the return - log shows "Air"
+
+console.log(airline.slice(0, airline.indexOf(' '))); //Log shows TAP
+console.log(airline.slice(airline.lastIndexOf(' ' + 1))); //Log shows Portugal - do the +1 to get rid of the space before Portugal
+
+console.log(airline.slice(-2)); //Log shows al - starts counting from the end
+console.log(airline.slice(1, -1)); //Log shows AP Air Portuga - starts at index one and removes the value at the end
+
+const checkMiddleSeat = function(seat) {
+  //B and E are middle seats
+  const s = seat.slice(-1); //This takes the last value in the string
+  if(s === 'B' || s === 'E') {
+    console.log(`You got the middle seat :(`);
+  } else {
+    console.log(`You got lucky!`);
+  };
+};
+
+checkMiddleSeat('11B');
+checkMiddleSeat('23C');
+checkMiddleSeat('3E');
+
+/*
 ////////////////////////////////////////
 //Coding Challenge three
 
@@ -86,7 +128,6 @@ for (const [minute, event] of gameEvents) { //Could have used a ternary operator
   };
 };
 
-/*
 ////////////////////////////////////////
 //Maps: Iteration
 
