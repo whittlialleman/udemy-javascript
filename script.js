@@ -52,6 +52,59 @@ const restaurant = {
   },
 };
 
+//////////////////////////////////////
+//Working with Strings - Part 3
+
+console.log('a+very+nice+string'.split('+'));
+console.log('Whittli Alleman'.split(' '));
+
+const [firstName, lastName] = 'Whittli Alleman'.split(' ');
+
+const newName = ['Mrs.', firstName, lastName.toUpperCase()].join(' ');
+console.log(newName);
+
+const capitalizeName = function(name) {
+  const names = name.split(' ');
+  const namesUpper = [];
+
+  for(const n of names) {
+    //namesUpper.push(n[0].toUpperCase() + n.slice(1));
+    namesUpper.push(n.replace(n[0], n[0].toUpperCase())); //Both of these do the same thing
+  };
+  console.log(namesUpper.join(' '));
+};
+
+capitalizeName('jessica ann smith davis');
+capitalizeName('whittli alleman');
+
+//Padding
+const message = "Go to gate 23!";
+console.log(message.padStart(25, '+').padEnd(35, '+'));
+console.log('Whip'.padStart(25, '+').padEnd(35, '+'));
+
+const maskCreditCard = function(number) {
+  const str = number + ''; //This converts the number to a string
+  const last = str.slice(-4);
+  return last.padStart(str.length, '*');
+}
+
+
+console.log(maskCreditCard(7364863529574637));
+console.log(maskCreditCard('23452347364863529574637'));
+
+//Repeat
+const message2 = 'Bad weather... All departures delayed... ';
+console.log(message2.repeat(5));
+
+const planesInLine = function(n) {
+  console.log(`There are ${n} planes in line ${'✈️'.repeat(n)}`);
+}
+
+planesInLine(5);
+planesInLine(3);
+planesInLine(12);
+
+/*
 /////////////////////////////////////
 //Working with Strings - Part 2
 
@@ -111,7 +164,6 @@ checkBaggage('I have a laptop, some Food, and a pocket Knife');
 checkBaggage('Socks and camera');
 checkBaggage('Got some snacks and a gun for protection');
 
-/*
 /////////////////////////////////////////
 //Working with Strings - Part 1
 
