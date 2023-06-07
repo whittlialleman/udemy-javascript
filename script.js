@@ -100,7 +100,6 @@ greet('Hello')('Whip'); //Console log shows Hello Whip
 const greetArrow = greeting => name => console.log(`${greeting} ${name}`);
 
 greetArrow('Hi')('Arrows');
-*/
 
 ////////////////////////////////////
 //Call and Apply Methods
@@ -193,3 +192,35 @@ const addTaxRate = function(rate) { //This is another way of doing the same thin
 const addVAT2 = addTaxRate(0.23);
 console.log(addVAT2(100));
 console.log(addVAT2(23));
+*/
+
+///////////////////////////////////////
+//Coding Challenge 1
+
+const poll = {
+    question: 'What is your favorite programming language?',
+    options: ['0: JavaScript', '1: Python', '2: Rust', '3: C++'],
+    answers: new Array(4).fill(0),
+    registerNewAnswer() {
+        const answer = Number(prompt(`${this.question}\n${this.options.join('\n')}\n(Write option number)`));
+        console.log(answer);
+
+        typeof answer === 'number' && answer < this.answers.length && this.answers[answer]++; //This is short circuiting - if the first two are true, the last one will execute
+        this.displayResults();
+        this.displayResults('string');
+    },
+    displayResults(type = 'array') {
+        if (type === 'array') {
+            console.log(this.answers);
+        } else if (type === 'string') {
+            console.log(`Poll results are ${this.answers.join(', ')}`);
+        }
+    }
+};
+
+//poll.registerNewAnswer();
+
+document.querySelector('.poll').addEventListener('click', poll.registerNewAnswer.bind(poll));
+
+poll.displayResults.call({answers: [5,2,3]}, 'string');
+poll.displayResults.call({answers: [1,5,3,9,6,1]});
