@@ -74,3 +74,36 @@ const currencies = new Map([
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
+
+let arr = ['a', 'b', 'c', 'd', 'e'];
+
+//slice
+console.log(arr.slice(2)); //Log shows c d e
+console.log(arr.slice(2, 4)); //Log shows c and d
+console.log(arr.slice(-2)); //Log shows d and e
+console.log(arr.slice(-1)); //Log shows e
+console.log(arr.slice(1, -2)); //Log shows b and c
+console.log(arr.slice()); //Shows the full array by creating a shallow copy
+console.log([...arr]); //Shows the full array by spreading
+
+//splice
+// console.log(arr.splice(2)); //Splice mutates the original array, so this shows c d and e and
+// console.log(arr); //this shows a and b
+
+arr.splice(-1); //Removes last element
+console.log(arr); //shows a b c d
+arr.splice(1, 2); //removes two elements starting at position 1
+console.log(arr); //shows a and d
+
+//Reverse
+arr = ['a', 'b', 'c', 'd', 'e'];
+const arr2 = ['j', 'i', 'h', 'g', 'f'];
+console.log(arr2.reverse()); //Reverse mutates the array
+console.log(arr2); //This shows the array backwards
+
+//concat
+const letters = arr.concat(arr2);
+console.log(letters); //This shows the two arrays together as one
+
+//Join
+console.log(letters.join(' - ')); //Shows a - b - c - d - etc
