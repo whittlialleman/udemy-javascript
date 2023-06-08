@@ -185,7 +185,6 @@ console.log(currenciesUnique);
 currenciesUnique.forEach(function(value, _, map) { //The underscore is for a throwaway value
   console.log(`${value}: ${value}`);
 });
-*/
 
 /////////////////////////////////
 //Coding Challenge 1
@@ -199,7 +198,7 @@ const checkDogs = function(dogsJulia, dogsKate) {
 
   const dogsAll = juliaCorrected.concat(dogsKate);
   console.log(dogsAll);
-  
+
   dogsAll.forEach(function(age, dog, dogsAll) {
     if(age >= 3) {
       console.log(`Dog number ${dog + 1} is an adult, and is ${age} years old`);
@@ -210,3 +209,30 @@ const checkDogs = function(dogsJulia, dogsKate) {
 };
 
 checkDogs(dogsJulia, dogsKate);
+*/
+
+///////////////////////////////
+//The Map Method
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const eurToUSD = 1.1;
+const movementsUSD = movements.map(function(mov) {
+  return mov * eurToUSD;
+});
+
+// const movementsUSD = movements.map(mov => //Same as above re-written with arrow function
+//   mov * eurToUSD);
+
+console.log(movements);
+console.log(movementsUSD);
+
+const movementsUSDfor = [];
+for(const mov of movements) {
+  movementsUSDfor.push(mov * eurToUSD);
+}
+console.log(movementsUSDfor);
+
+const movementsDescription = movements.map((mov, i) =>
+    `Movement ${i + 1}: You deposited ${mov > 0 ? 'deposited' : 'withdrew'} ${Math.abs(mov)}`
+);
+console.log(movementsDescription);
