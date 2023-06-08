@@ -1,5 +1,5 @@
 'use strict';
-
+/*
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // BANKIST APP
@@ -61,7 +61,8 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-//video 147
+//////////////////////////////////////
+//Creating Dom Elements - video 147
 const displayMovements = function(movements) {
   containerMovements.innerHTML = '';
 
@@ -186,6 +187,26 @@ currenciesUnique.forEach(function(value, _, map) { //The underscore is for a thr
 });
 */
 
-//////////////////////////////////////
-//Creating Dom Elements
+/////////////////////////////////
+//Coding Challenge 1
 
+const dogsJulia = [3,5,2,12,7];
+const dogsKate = [4,1,15,8,3];
+
+const checkDogs = function(dogsJulia, dogsKate) {
+  const juliaCorrected = dogsJulia.slice(1,3); //Could have done a slice and then splice here to mutate the data
+  console.log(juliaCorrected);
+
+  const dogsAll = juliaCorrected.concat(dogsKate);
+  console.log(dogsAll);
+  
+  dogsAll.forEach(function(age, dog, dogsAll) {
+    if(age >= 3) {
+      console.log(`Dog number ${dog + 1} is an adult, and is ${age} years old`);
+    } else {
+      console.log(`Dog number ${dog + 1} is still a puppy`);
+    }
+  });
+};
+
+checkDogs(dogsJulia, dogsKate);
