@@ -71,7 +71,7 @@ const currencies = new Map([
   ['GBP', 'Pound sterling'],
 ]);
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
 /*
@@ -107,7 +107,6 @@ console.log(letters); //This shows the two arrays together as one
 
 //Join
 console.log(letters.join(' - ')); //Shows a - b - c - d - etc
-*/
 
 //////////////////////////////////////////
 //The at Method
@@ -123,3 +122,28 @@ console.log(arr.at(-1));
 
 console.log('whip'.at(0));
 console.log('whip'.at(-1));
+*/
+
+///////////////////////////////////////
+//Looping Arrays: forEach
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+//for(const movement of movements) {
+for(const [i, movement] of movements.entries()) {
+  if(movement > 0) {
+    console.log(`Movement ${i + 1}: You deposited ${movement}`);
+  } else {
+    console.log(`Movement ${i + 1}: You withdrew ${Math.abs(movement)}`);
+  }
+};
+
+console.log('----forEach----')
+movements.forEach(function(mov, i, arr) {
+  if(mov > 0) {
+    console.log(`Movement ${i + 1}: You deposited ${mov}`);
+  } else {
+    console.log(`Movement ${i + 1}: You withdrew ${Math.abs(mov)}`);
+  }
+});
+//You cannot break out of a forEach loop, so continue and break don't work - if you need those, use a for of loop
