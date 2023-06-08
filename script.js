@@ -1,5 +1,5 @@
 'use strict';
-/*
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // BANKIST APP
@@ -78,6 +78,15 @@ const displayMovements = function(movements) {
 };
 
 displayMovements(account1.movements);
+
+const createUsernames = function (accts) {
+  accts.forEach(function(acct) {
+    acct.username = acct.owner.toLowerCase().split(' ').map(name => name[0]).join('');
+  });
+};
+
+createUsernames(accounts);
+console.log(accounts);
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -209,7 +218,6 @@ const checkDogs = function(dogsJulia, dogsKate) {
 };
 
 checkDogs(dogsJulia, dogsKate);
-*/
 
 ///////////////////////////////
 //The Map Method
@@ -236,3 +244,4 @@ const movementsDescription = movements.map((mov, i) =>
     `Movement ${i + 1}: You deposited ${mov > 0 ? 'deposited' : 'withdrew'} ${Math.abs(mov)}`
 );
 console.log(movementsDescription);
+*/
