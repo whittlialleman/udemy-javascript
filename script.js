@@ -192,7 +192,6 @@ const addTaxRate = function(rate) { //This is another way of doing the same thin
 const addVAT2 = addTaxRate(0.23);
 console.log(addVAT2(100));
 console.log(addVAT2(23));
-*/
 
 ///////////////////////////////////////
 //Coding Challenge 1
@@ -224,3 +223,27 @@ document.querySelector('.poll').addEventListener('click', poll.registerNewAnswer
 
 poll.displayResults.call({answers: [5,2,3]}, 'string');
 poll.displayResults.call({answers: [1,5,3,9,6,1]});
+*/
+
+///////////////////////////////////////
+//Immediately Invoked Function Expressions
+const runOnce = function() {
+    console.log('This will never run again');
+};
+runOnce();
+
+//IIFE standard
+(function() {  //Putting this into parentheses makes it an expression so JS accepts it
+    console.log('This will never run again');
+    const isPrivate = 23;
+})();
+
+//IIFE Arrow
+(() => console.log('This will also never run again'))();
+
+{
+    const isPrivate = 23; //Const is block scoped so it is not available outside the block
+    var notPrivate = 36; //Var is not block scoped so it is available outside the block
+};
+
+console.log(notPrivate);
