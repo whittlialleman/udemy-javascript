@@ -446,7 +446,6 @@ console.log(accounts);
 
 const account = accounts.find(acc => acc.owner === "Jessica Davis");
 console.log(account);
-*/
 
 /////////////////////////////////////
 //Some and Every
@@ -471,3 +470,30 @@ const deposit = mov => mov > 0;
 console.log(movements.some(deposit));
 console.log(movements.every(deposit));
 console.log(movements.filter(deposit));
+*/
+
+/////////////////////////////////////////////
+//Flat and flatMap
+
+const arr = [[1,2,3], [4,5,6], 7, 8];
+console.log(arr.flat()); //Puts all values in one array
+
+const arrDeep = [[[1,2],3], [4,[5,6]], 7, 8];
+console.log(arrDeep.flat()); //Keeps two arrays in a new array - only goes one level of nesting deep
+console.log(arrDeep.flat(2)); //This sets the depth of nesting, so this shows all values in one array - default depth is 1
+
+// const accountMovements = accounts.map(acc => acc.movements);
+// console.log(accountMovements);
+
+// const allMovements = accountMovements.flat();
+// console.log(allMovements);
+
+// const overallBalance = allMovements.reduce((acc, mov) => acc + mov, 0);
+
+//Doing all of the above with flat and chaining
+const overallBalance = accounts.map(acc => acc.movements).flat().reduce((acc, mov) => acc + mov, 0);
+console.log(overallBalance);
+
+//flatMap - can only go one level deep
+const overallBalance2 = accounts.flatMap(acc => acc.movements).reduce((acc, mov) => acc + mov, 0);
+console.log(overallBalance);
