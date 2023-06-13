@@ -505,7 +505,6 @@ console.log(overallBalance);
 //flatMap - can only go one level deep
 const overallBalance2 = accounts.flatMap(acc => acc.movements).reduce((acc, mov) => acc + mov, 0);
 console.log(overallBalance);
-*/
 
 /////////////////////////////////////
 //Sorting Arrays
@@ -546,4 +545,32 @@ movements.sort((a, b) => {
 
 movements.sort((a,b) => b - a); //Simpler way to write the above code
 console.log(movements);
-//
+*/
+
+/////////////////////////////////////////////
+//Creating and Filling Arrays
+
+const arr = [1,2,3,4,5,6,7];
+const x = new Array(7); //This creates an array with 7 empty slots
+console.log(x);
+console.log(x.map(() => 5));
+
+//x.fill(1); //This fills the array with 1's
+//x.fill(1, 3); //This fills the array with 1's starting at index 3
+x.fill(1, 3, 5); //This fills the array with 1's starting at index 3 and ending at index 5
+console.log(x);
+
+arr.fill(23, 2, 6); //replaces the values in the array from indices 2-6 with 23
+console.log(arr);
+
+//Array.from
+const y = Array.from({length: 7}, () => 1);
+console.log(y);
+
+const z = Array.from({length: 7}, (cur, i) => i+1);
+console.log(z);
+
+labelBalance.addEventListener('click', function() {
+  const movementsUI = Array.from(document.querySelectorAll('.movements__value'), el => Number(el.textContent.replace('€', '')));
+  console.log(movementsUI);
+});
