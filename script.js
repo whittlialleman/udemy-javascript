@@ -545,7 +545,6 @@ movements.sort((a, b) => {
 
 movements.sort((a,b) => b - a); //Simpler way to write the above code
 console.log(movements);
-*/
 
 /////////////////////////////////////////////
 //Creating and Filling Arrays
@@ -574,3 +573,41 @@ labelBalance.addEventListener('click', function() {
   const movementsUI = Array.from(document.querySelectorAll('.movements__value'), el => Number(el.textContent.replace('€', '')));
   console.log(movementsUI);
 });
+*/
+
+/////////////////////////////////////////////
+//Array Methods Practice
+
+//Total amount of all deposits
+const bankDepositSum = accounts.flatMap(acc => acc.movements).filter(mov => mov > 0).reduce((sum, curr) => sum + curr, 0);
+console.log(bankDepositSum);
+
+//How many deposits with at least 100
+//const numDeposit1000 = accounts.flatMap(acc => acc.movements).filter(mov => mov >= 1000).length;
+const numDeposit1000 = accounts.flatMap(acc => acc.movements).reduce((count, curr) => (curr >= 1000 ? count + 1 : count), 0);
+console.log(numDeposit1000);
+
+let a = 10;
+//console.log(a++); //log will still show 10 - a won't change it's value until it's called again
+console.log(a); //log shows 11
+console.log(++a); //log will show 11 because the increment happens before
+
+const {deposits, withdrawals} = accounts.flatMap(acc => acc.movements).reduce((sums, curr) => {
+  //curr > 0 ? sums.deposits += curr : sums.withdrawals += curr; //line below is the same without repetition
+  sums[curr > 0 ? 'deposits' : 'withdrawals'] += curr;
+  return sums;
+}, {deposits: 0, withdrawals: 0});
+
+console.log(deposits, withdrawals);
+
+//this is a nice title -> This Is a Nice Title
+const convertTitleCase = function(title) {
+  const capitalize = str => str[0].toUpperCase() + str.slice(1);
+  const exceptions = ['a', 'an', 'the', 'but', 'and', 'or', 'on', 'in', 'with', 'is'];
+
+  const titleCase = title.toLowerCase().split(' ').map(word => exceptions.includes(word) ? word : word[0].toUpperCase() + word.slice(1)).join(' ');
+  return capitalize(titleCase);
+};
+console.log(convertTitleCase('this is a nice title'));
+console.log(convertTitleCase('this is a LONG title but not too long'));
+console.log(convertTitleCase('and here is another title with an EXAMPLE'));
