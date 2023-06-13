@@ -63,10 +63,12 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 //////////////////////////////////////
 //Creating Dom Elements - video 147
-const displayMovements = function(movements) {
+const displayMovements = function(movements, sort = false) {
   containerMovements.innerHTML = '';
 
-  movements.forEach(function(mov, i) {
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+
+  movs.forEach(function(mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
     const html = `
     <div class="movements__row">
@@ -193,6 +195,13 @@ btnClose.addEventListener('click', function(e) {
   inputCloseUsername.value = inputClosePin.value = '';
 });
 
+let sorted = false;
+btnSort.addEventListener('click', function(e) {
+  e.preventDefault();
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
+});
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -203,7 +212,7 @@ btnClose.addEventListener('click', function(e) {
 //   ['GBP', 'Pound sterling'],
 // ]);
 
-// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
 /*
@@ -470,7 +479,6 @@ const deposit = mov => mov > 0;
 console.log(movements.some(deposit));
 console.log(movements.every(deposit));
 console.log(movements.filter(deposit));
-*/
 
 /////////////////////////////////////////////
 //Flat and flatMap
@@ -497,3 +505,45 @@ console.log(overallBalance);
 //flatMap - can only go one level deep
 const overallBalance2 = accounts.flatMap(acc => acc.movements).reduce((acc, mov) => acc + mov, 0);
 console.log(overallBalance);
+*/
+
+/////////////////////////////////////
+//Sorting Arrays
+
+//Strings
+const owners = ['Whip', 'Zack', 'Adam', 'Martha'];
+console.log(owners.sort());
+console.log(owners); //sort mutates the array so logging it again will show the new arrangement
+
+//Numbers
+console.log(movements);
+
+console.log(movements.sort()); //log shows [-130, -400, -650, 1300, 200, 3000, 450, 70] because they are "alphabetically" sorted
+//return < 0, a comes before b (keep order) - return > 0, a comes after b (switch order)
+
+//Ascending
+movements.sort((a, b) => {
+  if(a > b) {
+    return 1
+  }
+  if(b > a) {
+    return -1
+  }
+});
+
+movements.sort((a,b) => a - b); //Simpler way to write the above code
+console.log(movements);
+
+//Descending
+movements.sort((a, b) => {
+  if(a > b) {
+    return -1
+  }
+  if(b > a) {
+    return 1
+  }
+});
+
+movements.sort((a,b) => b - a); //Simpler way to write the above code
+console.log(movements);
+//
