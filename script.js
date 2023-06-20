@@ -379,7 +379,6 @@ const PI = 3.14_15;
 console.log(PI);
 
 console.log(Number('230_000')); //log shows NaN because the string makes the _ a value instead of being ignored
-*/
 
 /////////////////////////////////////
 //Working with BigInt
@@ -414,3 +413,41 @@ console.log(huge + ' is REALLY big!'); //This shows the string correctly
 //Divisions
 console.log(10n / 3n); //shows 3n because it cuts off the decimal
 console.log(10 /3);
+*/
+
+////////////////////////////////////
+//Creating Dates
+
+//Create a date - 4 ways
+const now = new Date();
+console.log(now);
+
+console.log(new Date('Jun 20 2023 09:32:23'));
+console.log(new Date('December 25, 2016'));
+console.log(new Date(account1.movementsDates[0]));
+
+console.log(new Date(2037, 10, 19, 15, 23, 5)); //the 10 for the month shows Nov instead of Oct because it's 0 based
+console.log(new Date(2037, 10, 31)); //Nov only has 30 days so this would show Dec 1
+
+console.log(new Date(0));
+console.log(new Date(3 * 24 * 60 * 60 * 1000));
+
+//Working with dates
+const future = new Date(2037, 10, 19, 15, 23);
+console.log(future);
+console.log(future.getFullYear());
+console.log(future.getMonth());
+console.log(future.getDate());
+console.log(future.getDay());
+console.log(future.getHours());
+console.log(future.getMinutes());
+console.log(future.getSeconds());
+console.log(future.toISOString());
+console.log(future.getTime());
+
+console.log(new Date(2142282180000));
+
+console.log(Date.now());
+
+future.setFullYear(2040);
+console.log(future);
