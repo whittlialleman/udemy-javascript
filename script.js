@@ -287,7 +287,7 @@ btnLoan.addEventListener('click', function (e) {
   const amount = Math.floor(inputLoanAmount.value);
 
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
-    // Add movement
+    setTimeout(function(){// Add movement
     currentAccount.movements.push(amount);
 
     //Add loan date
@@ -295,6 +295,7 @@ btnLoan.addEventListener('click', function (e) {
 
     // Update UI
     updateUI(currentAccount);
+  }, 2500);
   }
   inputLoanAmount.value = '';
 });
@@ -542,7 +543,6 @@ const calcDaysPassed = (date1, date2) => Math.abs(date2 - date1) / (1000 * 60 * 
 
 const days1 = calcDaysPassed(new Date(2037, 3, 14), new Date(2037, 3, 4));
 console.log(days1);
-*/
 
 ////////////////////////////////
 //Internationalizing numbers
@@ -560,3 +560,22 @@ console.log('US: ', new Intl.NumberFormat('en-US', options2).format(num));
 console.log('Germany: ', new Intl.NumberFormat('de-DE', options2).format(num));
 console.log('Syria: ', new Intl.NumberFormat('ar-SY', options2).format(num));
 console.log(navigator.language, new Intl.NumberFormat(navigator.language, options2).format(num));
+
+/////////////////////////////////////
+//Timers
+
+//setTimeout
+const ingredients = ['Canadian bacon', 'cheese']
+const pizzaTimer = setTimeout((ing1, ing2) => console.log(`Here is your pizza with ${ing1} and ${ing2}`), 3000, ...ingredients); //log shows this message after 3 seconds
+console.log('Waiting...'); //This shows up before the first message because the first message waits 3 seconds - this is due to asynchronous JS
+
+if(ingredients.includes('cheese')) {
+  clearTimeout(pizzaTimer);
+};
+
+//setInterval
+setInterval(function () {
+  const not = new Date();
+  console.log(now);
+}, 1000);
+*/
