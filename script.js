@@ -361,7 +361,6 @@ labelBalance.addEventListener('click', function () {
     }
   });
 }); //this is good to use when you need to do something every nth time
-*/
 
 ///////////////////////////////////////
 //Numeric Separators
@@ -380,3 +379,38 @@ const PI = 3.14_15;
 console.log(PI);
 
 console.log(Number('230_000')); //log shows NaN because the string makes the _ a value instead of being ignored
+*/
+
+/////////////////////////////////////
+//Working with BigInt
+
+console.log(2 ** 53 - 1); //biggest number that JS can safely represent
+console.log(Number.MAX_SAFE_INTEGER);
+console.log(2 ** 53 + 1); //These do not always show correctly
+console.log(2 ** 53 + 2);
+console.log(2 ** 53 + 3);
+console.log(2 ** 53 + 4);
+
+console.log(684765435143215464534131321534n); //The n changes this to a bigInt so it shows the number accurately
+console.log(BigInt(684765435143215464534131321534)); //Shows almost the same number as above, but JS still does some weird things to it
+
+//Operations
+console.log(10000n + 10000n);
+console.log(9234573458673954739587398547n * 100000000n);
+//console.log(Math.sqrt(16n)); //This doesn't work
+
+const huge = 2043598735987394n;
+const num = 23;
+//console.log(huge * num); //This doesn't work because you can't combine a big int and a regular number
+console.log(huge * BigInt(num)); //This works because we change it to a bigint
+
+//Exceptions
+console.log(20n > 15); //This works because we are only comparing numbers, not combining/altering them
+console.log(20n === 20); //This shows false because they are different types
+console.log(typeof(20n)); //bigint
+console.log(20n === '20'); //This shows true because it does type conversion on the string
+console.log(huge + ' is REALLY big!'); //This shows the string correctly
+
+//Divisions
+console.log(10n / 3n); //shows 3n because it cuts off the decimal
+console.log(10 /3);
