@@ -331,7 +331,6 @@ console.log((2.7).toFixed(0)); //log shows 3 but it's a string, not a number
 console.log((2.7).toFixed(3)); //log shows 2.700
 console.log((2.345).toFixed(2)); //log shows 2.35
 console.log(+(2.345).toFixed(2)); //log shows 2.35 as a number
-*/
 
 //////////////////////////////////
 //The Remainder Operator
@@ -362,3 +361,22 @@ labelBalance.addEventListener('click', function () {
     }
   });
 }); //this is good to use when you need to do something every nth time
+*/
+
+///////////////////////////////////////
+//Numeric Separators
+
+//287,460,000,000
+const diameter = 287_460_000_000; //You can use the _ to separate numbers to make it more readable
+console.log(diameter);
+
+const priceCents = 354_99;
+console.log(priceCents);
+
+const transferFee1 = 15_00; //log will show both of these as the same number but we can give meaning with the _
+const transferFee2 = 1_500;
+
+const PI = 3.14_15;
+console.log(PI);
+
+console.log(Number('230_000')); //log shows NaN because the string makes the _ a value instead of being ignored
