@@ -289,7 +289,6 @@ console.log(Number.isNaN(23 / 0)); //log shows false because infinity is not fin
 console.log(Number.isInteger(23)); //log shows true
 console.log(Number.isInteger(23.0)); //log shows true
 console.log(Number.isInteger(23 / 0)); //log shows false
-*/
 
 ///////////////////////////////////////
 //Math and Rounding
@@ -332,3 +331,34 @@ console.log((2.7).toFixed(0)); //log shows 3 but it's a string, not a number
 console.log((2.7).toFixed(3)); //log shows 2.700
 console.log((2.345).toFixed(2)); //log shows 2.35
 console.log(+(2.345).toFixed(2)); //log shows 2.35 as a number
+*/
+
+//////////////////////////////////
+//The Remainder Operator
+
+console.log(5 % 2); //log shows 1 because 2 goes into 5 2 times with a remainder of 1
+console.log(5 / 2);
+console.log(8 % 3); //2
+console.log(8 / 3); //8 = 2*3 + 2
+
+console.log(6 % 2); //0
+console.log(6 / 2); //3
+
+console.log(7 % 2); //1
+console.log(7 / 3);
+
+const isEven = n => n % 2 === 0;
+console.log(isEven(8)); //true
+console.log(isEven(23)); //false
+console.log(isEven(514)); //true
+
+labelBalance.addEventListener('click', function () {
+[...document.querySelectorAll('.movements__row')].forEach(function(row, i) {
+  if (i % 2 === 0) {
+    row.style.backgroundColor = 'orangered';
+    }
+  if( i % 3 === 0) {
+    row.style.backgroundColor = 'blue';
+    }
+  });
+}); //this is good to use when you need to do something every nth time
