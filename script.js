@@ -63,3 +63,44 @@ header.append(message);
 document.querySelector('.btn--close-cookie').addEventListener('click', function() {
   message.remove();
 });
+
+//Styles
+message.style.backgroundColor = '#37383d';
+message.style.width = '120%';
+
+console.log(message.style.height); //This doesn't work because we didn't set it manually inline
+console.log(message.style.backgroundColor); //This does work because we just set it inline above
+console.log(getComputedStyle(message).color); //This is show we get properties we didn't manually set inline
+console.log(getComputedStyle(message).height); //This shows the height
+
+message.style.height = Number.parseFloat(getComputedStyle(message).height, 10) + 30 + 'px';
+
+document.documentElement.style.setProperty('--color-primary', 'orangered'); //This was a custom set property so we need to use setProperty to change it
+
+//Attributes
+const logo = document.querySelector('.nav__logo');
+console.log(logo.alt);
+console.log(logo.className);
+
+console.log(logo.designer); //This doesn't work because it's non-standard
+console.log(logo.getAttribute('designer')); //This is how to get that attribute we created
+logo.setAttribute('company', 'Bankist');
+
+console.log(logo.src);
+console.log(logo.getAttribute('src'));
+
+const link = document.querySelector('.nav__link--btn');
+console.log(link.href);
+console.log(link.getAttribute('href'));
+
+//Data attributes
+console.log(logo.dataset.versionNumber);
+
+//Classes
+logo.classList.add('c', 'j');
+logo.classList.remove('c', 'j');
+logo.classList.toggle('c');
+logo.classList.contains('c'); //not includes
+
+//Don't do this - will override anything already there and only allows one class
+//ogo.className = 'whip'
