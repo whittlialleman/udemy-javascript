@@ -1,12 +1,14 @@
 'use strict';
 
-///////////////////////////////////////
-// Modal window
-
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
+
+///////////////////////////////////////
+// Modal window
 
 const openModal = function (e) {
   e.preventDefault();
@@ -29,6 +31,61 @@ document.addEventListener('keydown', function (e) {
     closeModal();
   }
 });
+
+//////////////////////////////////////////
+//Button scrolling
+btnScrollTo.addEventListener('click', function(e) {
+  const s1coords = section1.getBoundingClientRect();
+  console.log(s1coords);
+
+  console.log(e.target.getBoundingClientRect());
+
+  console.log('Current scroll X/Y', window.pageXOffset, pageYOffset); //This doesn't work the same way as it did when he made the video - replaced with scrollY and scrollX from what I could find on MDN
+
+  console.log('height/width viewport', document.documentElement.clientHeight, document.documentElement.clientWidth);
+
+  //Scrolling
+  //window.scrollTo(s1coords.left + window.scrollX, s1coords.top + window.scrollY);
+
+  // window.scrollTo({ //Old school way of doing this
+  //   left: s1coords.left + window.scrollX,
+  //   top: s1coords.top + window.scrollY,
+  //   behavior: 'smooth',
+  // });
+
+  section1.scrollIntoView({behavior: 'smooth'});
+});
+
+////////////////////////////////////////////
+//Page Navigation
+
+// document.querySelectorAll('.nav__link').forEach(function(el) {
+//   el.addEventListener('click', function(e) {
+//     e.preventDefault();
+//     const id = this.getAttribute('href');
+//     console.log(id);
+//     document.querySelector(id).scrollIntoView({behavior: 'smooth'});
+//   });
+// });
+
+//1. Add event listener to common parent element
+//2. Determine what element originated the event
+
+document.querySelector('.nav__links').addEventListener('click', function(e) {
+  e.preventDefault();
+
+  //Matching strategy -ignores clicks that didn't happen directly on the links
+  if(e.target.classList.contains('nav__link')) {
+    const id = e.target.getAttribute('href');
+    console.log(id);
+    document.querySelector(id).scrollIntoView({behavior: 'smooth'});
+  }
+});
+
+//////////////////////////////////////////////
+//////////////////////////////////////////////
+//////////////////////////////////////////////
+//Lecture code alongs
 
 /*
 /////////////////////////////////////////////
@@ -143,7 +200,6 @@ setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
 // h1.onmouseenter = function(e) {
 //   alert('onmouseenter: Great! You are reading the heading');
 // };
-*/
 
 //////////////////////////////////////////////
 //Event Propagation
@@ -170,3 +226,5 @@ document.querySelector('.nav').addEventListener('click', function (e) {
   this.style.backgroundColor = randomColor();
   console.log('NAV', e.target, e.currentTarget);
 });
+*/
+
