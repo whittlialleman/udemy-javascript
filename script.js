@@ -30,6 +30,7 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
+/*
 /////////////////////////////////////////////
 //Selecting, Creating, and Deleting Elements
 
@@ -104,3 +105,28 @@ logo.classList.contains('c'); //not includes
 
 //Don't do this - will override anything already there and only allows one class
 //ogo.className = 'whip'
+*/
+
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+btnScrollTo.addEventListener('click', function(e) {
+  const s1coords = section1.getBoundingClientRect();
+  console.log(s1coords);
+
+  console.log(e.target.getBoundingClientRect());
+
+  console.log('Current scroll X/Y', window.pageXOffset, pageYOffset); //This doesn't work the same way as it did when he made the video - replaced with scrollY and scrollX from what I could find on MDN
+
+  console.log('height/width viewport', document.documentElement.clientHeight, document.documentElement.clientWidth);
+
+  //Scrolling
+  //window.scrollTo(s1coords.left + window.scrollX, s1coords.top + window.scrollY);
+
+  // window.scrollTo({ //Old school way of doing this
+  //   left: s1coords.left + window.scrollX,
+  //   top: s1coords.top + window.scrollY,
+  //   behavior: 'smooth',
+  // });
+
+  section1.scrollIntoView({behavior: 'smooth'});
+});
