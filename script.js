@@ -1,5 +1,6 @@
 'use strict';
 
+/*
 /////////////////////////////////////
 //Constructor Functions and the New Operator
 
@@ -72,3 +73,30 @@ console.log(arr.unique());
 
 const h1 = document.querySelector('h1');
 console.dir(x => x + 1);
+*/
+
+///////////////////////////////////////
+//Coding Challenge 1
+
+const Car = function(make, speed) {
+    this.make = make;
+    this.speed = speed;
+};
+
+Car.prototype.accelerate = function() {
+    const newSpeed = this.speed += 10; //could have bypassed the variable and just done this.speed in the object literal
+    console.log(`${this.make} is going ${newSpeed} km/h.`);
+};
+
+Car.prototype.brake = function() {
+    const newSpeed = this.speed -= 5;
+    console.log(`${this.make} is going ${newSpeed} km/h.`);
+};
+
+const bmw = new Car('BMW', 120);
+const mercedes = new Car('Mercedes', 95);
+
+bmw.brake();
+bmw.accelerate();
+mercedes.brake();
+mercedes.accelerate();
