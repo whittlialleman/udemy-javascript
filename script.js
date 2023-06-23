@@ -497,17 +497,20 @@ class Account {
     }
 
     deposit(val) {
-        this.#movements.push(val)
+        this.#movements.push(val);
+        return this;
     }
 
     withdrawal(val) {
-        this.deposit(-val)
+        this.deposit(-val);
+        return this;
     }
 
     requestLoan(val) {
         if(this.#approveLoan(val)) {
             this.deposit(val);
             console.log('Loan Approved');
+            return this;
         }
     }
 
@@ -528,9 +531,12 @@ acc1.deposit(250);
 acc1.withdrawal(140);
 acc1.requestLoan(1000);
 console.log(acc1.getMovements());
+Account.helper();
 
 //console.log(acc1.#movements); //This won't work because we made this a private field
 //console.log(acc1.#pin); //This won't work because we made this a private field
 //console.log(acc1.#approveLoan(100)); //This won't work because we made this a private method
 
-Account.helper();
+//Chaining
+acc1.deposit(300).deposit(500).withdrawal(35).requestLoan(25000).withdrawal(4000);
+console.log(acc1.getMovements());
