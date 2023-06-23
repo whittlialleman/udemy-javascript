@@ -52,3 +52,23 @@ console.log(whip, matilda);
 
 console.log(whip.hasOwnProperty('firstName')); //true
 console.log(whip.hasOwnProperty('species')); //false
+
+console.log(whip.__proto__); //whip prototype
+console.log(whip.__proto__.__proto__); //object.prototype - top of prototype chain
+console.log(whip.__proto__.__proto__.__proto__); //null
+
+console.dir(Person.prototype.constructor);
+
+const arr = [3,4,6,6,9,5,6,9,3];
+console.log(arr.__proto__); //Array prototype
+console.log(arr.__proto__ === Array.prototype); //true
+console.log(arr.__proto__.__proto__);
+
+Array.prototype.unique = function() { //Be careful adding onto built-in prototypes - don't do this in general
+    return [...new Set(this)];
+};
+
+console.log(arr.unique());
+
+const h1 = document.querySelector('h1');
+console.dir(x => x + 1);
