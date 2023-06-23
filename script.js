@@ -191,7 +191,6 @@ const jessica = new PersonCl('Jessica Davis', 1996);
 console.log(jessica.age);
 
 const walter = new PersonCl('Walter White', 1965);
-*/
 
 /////////////////////////////////////
 //Static Methods
@@ -245,3 +244,30 @@ class PersonCl {
 };
 
 PersonCl.hey();
+*/
+
+//////////////////////////////////
+//Object.create
+
+const PersonProto = {
+    calcAge() {
+        console.log(2037 - this.birthYear);
+    },
+
+    init(firstName, birthYear) {
+        this.firstName = firstName;
+        this.birthYear = birthYear;
+    },
+};
+
+const steven = Object.create(PersonProto);
+steven.name = 'Steven';
+steven.birthYear = 2002;
+steven.calcAge();
+
+console.log(steven.__proto__ === PersonProto);
+
+const piper = Object.create(PersonProto);
+piper.init('Piper', 1998);
+piper.calcAge();
+
