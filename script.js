@@ -136,7 +136,6 @@ jessica.greet();
 //1. Classes are not hoisted
 //2. Classes are first-class citizens
 //3. Classes are executed in strict mode (even if it's not declared at the top of the file)
-*/
 
 ////////////////////////////////////
 //Getters and Setters
@@ -192,3 +191,57 @@ const jessica = new PersonCl('Jessica Davis', 1996);
 console.log(jessica.age);
 
 const walter = new PersonCl('Walter White', 1965);
+*/
+
+/////////////////////////////////////
+//Static Methods
+
+const Person = function(firstName, birthYear) {
+    //Instance properties
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+};
+
+Person.hey = function() {
+    console.log('Hey there!');
+};
+
+Person.hey();
+//whip.hey(); //this doesn't work because the hey function was not added to the prototype
+
+class PersonCl {
+    constructor(fullName, birthYear) {
+        this.fullName = fullName;
+        this.birthYear = birthYear;
+    };
+
+    //methods will be added to .prototype property - instance methods
+    calcAge() {
+        console.log(2037 - this.birthYear);
+    };
+
+    greet() {
+        console.log(`Hey ${this.firstName}`);
+    };
+
+    get age() {
+        return 2037 - this.birthYear;
+    };
+
+    set fullName(name) {
+        if(name.includes(' ')) this._fullName = name;
+        else alert(`${name} is not a full name!`)
+    };
+
+    get fullName() {
+        return this._fullName;
+    };
+
+    //Statid method
+    static hey() {
+        console.log('Hey there!');
+        console.log(this);
+    }
+};
+
+PersonCl.hey();
