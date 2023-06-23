@@ -431,7 +431,6 @@ class StudentCl extends PersonCl {
 const martha = new StudentCl('Martha Jones', 2012, 'Computer Science');
 martha.introduce();
 martha.calcAge();
-*/
 
 //////////////////////////////////////
 //Inheritance between classes: ES6 Classes
@@ -464,3 +463,48 @@ const jay = Object.create(StudentProto);
 jay.init('Jay', 2010, 'Computer Science');
 jay.introduce();
 jay.calcAge();
+*/
+
+//////////////////////////////////
+//Class example
+
+class Account {
+    constructor(owner, currency, pin) {
+        this.owner = owner;
+        this.currency = currency;
+        this.pin = pin;
+        this.movements = [];
+        this.locale = navigator.language;
+
+        console.log(`Thanks for opening an account, ${owner}!`);
+    }
+
+    //Public interface
+    deposit(val) {
+        this.movements.push(val)
+    }
+
+    withdrawal(val) {
+        this.deposit(-val)
+    }
+
+    approveLoan(val) {
+        return true;
+    }
+
+    requestLoan(val) {
+        if(this.approveLoan(val)) {
+            this.deposit(val);
+            console.log('Loan Approved');
+        }
+    }
+}
+
+const acc1 = new Account('Whip', 'USD', 1223);
+console.log(acc1);
+
+acc1.deposit(250);
+acc1.withdrawal(140);
+acc1.requestLoan(1000);
+
+console.log(acc1.pin);
