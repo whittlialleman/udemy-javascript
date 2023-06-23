@@ -269,7 +269,6 @@ console.log(steven.__proto__ === PersonProto);
 const piper = Object.create(PersonProto);
 piper.init('Piper', 1998);
 piper.calcAge();
-*/
 
 ////////////////////////////////////
 //Coding Challenge 2
@@ -304,3 +303,42 @@ console.log(ford.speedUS);
 ford.accelerate();
 ford.speedUS = 50;
 console.log(ford);
+*/
+
+///////////////////////////////////////
+//Inheritance between classes: constructor functions
+
+const Person = function (firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+};
+
+Person.prototype.calcAge = function () {
+    console.log(2037 - this.birthYear);
+};
+
+const Student = function(firstName, birthYear, course) {
+    Person.call(this, firstName, birthYear);
+    this.course = course;
+};
+
+//Linking prototypes
+Student.prototype = Object.create(Person.prototype); //we have to create this before we add methods because it returns an empty string
+
+Student.prototype.introduce = function() {
+    console.log(`My name is ${this.firstName} and I study ${this.course}`);
+};
+
+const mike = new Student('Mike', 2020, 'Computer Science');
+mike.introduce();
+mike.calcAge();
+
+console.log(mike.__proto__);
+console.log(mike.__proto__.__proto__);
+
+console.log(mike instanceof Student);
+console.log(mike instanceof Person);
+console.log(mike instanceof Object);
+
+Student.prototype.constructor = Student;
+console.dir(Student.prototype.constructor);
