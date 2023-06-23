@@ -244,7 +244,6 @@ class PersonCl {
 };
 
 PersonCl.hey();
-*/
 
 //////////////////////////////////
 //Object.create
@@ -270,4 +269,38 @@ console.log(steven.__proto__ === PersonProto);
 const piper = Object.create(PersonProto);
 piper.init('Piper', 1998);
 piper.calcAge();
+*/
 
+////////////////////////////////////
+//Coding Challenge 2
+
+class Car {
+    constructor(make, speed) {
+        this.make = make;
+        this.speed = speed;
+    }
+
+    accelerate() {
+        this.speed += 10;
+        console.log(`${this.make} is going ${this.speed} km/h.`);
+    }
+
+    brake() {
+        this.speed -= 5;
+        console.log(`${this.make} is going ${this.speed} km/h.`);
+    }
+
+    get speedUS() {
+        return this.speed / 1.6;
+    }
+
+    set speedUS(speed) {
+        this.speed = speed * 1.6
+    }
+};
+
+const ford = new Car('Ford', 120);
+console.log(ford.speedUS);
+ford.accelerate();
+ford.speedUS = 50;
+console.log(ford);
