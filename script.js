@@ -78,9 +78,14 @@ class App {
     #workouts = [];
 
     constructor() {
+        //Get user position
         this._getPosition();
+
+        //Get data from local storage
+        this._getLocalStorage();
+
+        //Attach event handlers
         form.addEventListener('submit', this._newWorkout.bind(this));
-        
         inputType.addEventListener('change', this._toggleElevationField);
         containerWorkouts.addEventListener('click', this._moveToPopup.bind(this))
     }
@@ -96,7 +101,6 @@ class App {
     _loadMap(position) {
         const {latitude} = position.coords;
         const {longitude} = position.coords;
-        console.log(`https://www.google.com/maps/@${latitude},${longitude}`);
     
         const coords = [latitude, longitude];
             
@@ -106,6 +110,10 @@ class App {
     
         //Handling clicks on map
         this.#map.on('click', this._showForm.bind(this));
+
+        this.#workouts.forEach(work => {
+            this._renderWorkoutMarker(work);
+        });
     }
 
     _showForm(mapE) {
@@ -168,7 +176,6 @@ class App {
 
         //Add new object to workout array
         this.#workouts.push(workout);
-        console.log(workout);
 
         //Render workout on map as marker
         this._renderWorkoutMarker(workout);
@@ -178,6 +185,9 @@ class App {
         
         //Hide form and clear input fields
         this._hideForm();
+
+        //Set local storage to all workouts
+        this._setLocalStorage();
     }
 
     _renderWorkoutMarker(workout) {
@@ -191,7 +201,7 @@ class App {
         <div class="workout__details">
           <span class="workout__icon">${workout.type === 'running' ? '🏃‍♂️ ' : '🚴‍♀️ '}</span>
           <span class="workout__value">${workout.distance}</span>
-          <span class="workout__unit">km</span>
+          <span class="workout__unit">mi</span>
         </div>
         <div class="workout__details">
           <span class="workout__icon">⏱</span>
@@ -204,7 +214,7 @@ class App {
             <div class="workout__details">
             <span class="workout__icon">⚡️</span>
             <span class="workout__value">${workout.pace.toFixed(1)}</span>
-            <span class="workout__unit">min/km</span>
+            <span class="workout__unit">min/mi</span>
           </div>
           <div class="workout__details">
             <span class="workout__icon">🦶🏼</span>
@@ -219,12 +229,12 @@ class App {
             <div class="workout__details">
             <span class="workout__icon">⚡️</span>
             <span class="workout__value">${workout.speed.toFixed(1)}</span>
-            <span class="workout__unit">km/h</span>
+            <span class="workout__unit">mi/h</span>
           </div>
           <div class="workout__details">
             <span class="workout__icon">⛰</span>
             <span class="workout__value">${workout.elevationGain}</span>
-            <span class="workout__unit">m</span>
+            <span class="workout__unit">mi</span>
           </div>
         </li>`
         };
@@ -234,12 +244,10 @@ class App {
 
     _moveToPopup(e) {
         const workoutEl = e.target.closest('.workout');
-        console.log(workoutEl);
 
         if(!workoutEl) return;
 
         const workout = this.#workouts.find(work => work.id === workoutEl.dataset.id);
-        console.log(workout);
 
         this.#map.setView(workout.coords, this.#mapZoomLevel, {
             animate: true,
@@ -249,7 +257,28 @@ class App {
         });
 
         //using the public interface
-        workout._click();
+        //workout.click();
+    }
+
+    _setLocalStorage() {
+        localStorage.setItem('workouts', JSON.stringify(this.#workouts));
+    }
+
+    _getLocalStorage() {
+        const data = JSON.parse(localStorage.getItem('workouts'));
+
+        if(!data) return;
+
+        this.#workouts = data;
+
+        this.#workouts.forEach(work => {
+            this._renderWorkout(work);
+        });
+    }
+
+    reset() {
+        localStorage.removeItem('workouts');
+        location.reload();
     }
 };
 
