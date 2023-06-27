@@ -1,10 +1,12 @@
 'use strict';
 
-//https://countries-api-836d.onrender.com/countries/ - new API link
 const btn = document.querySelector('.btn-country');
 const countriesContainer = document.querySelector('.countries');
 
-///////////////////////////////////////
+const renderError = function(msg) {
+    countriesContainer.insertAdjacentText('beforeend', msg);
+    // countriesContainer.style.opacity = 1;
+}
 
 const renderCountry = function(data, className) {
     const languages = Object.values(data.languages);
@@ -22,7 +24,7 @@ const renderCountry = function(data, className) {
             </div>
         </article>`;
         countriesContainer.insertAdjacentHTML('beforeend', html);
-        countriesContainer.style.opacity = 1;
+        // countriesContainer.style.opacity = 1;
 }
 /*
 const getCountryAndNeighbor = function(country) {
@@ -92,6 +94,8 @@ setTimeout(() => {
 
 // getCountryData('usa');
 
+
+
 const getCountryData = function(country) {
     //country 1
     fetch(`https://restcountries.com/v3.1/name/${country}`)
@@ -106,7 +110,18 @@ const getCountryData = function(country) {
         return fetch(`https://restcountries.com/v3.1/alpha/${neighbour}`);
     })
     .then(response => response.json())
-    .then(data => renderCountry(data[0], 'neighbour'));
+    .then(data => renderCountry(data[0], 'neighbour'))
+    .catch(err => {
+        console.error(`${err}`);
+        renderError(`Something went wrong. ${err.message}. Try again!`);
+    })
+    .finally(() => {
+        countriesContainer.style.opacity = 1;
+    });
 };
 
-getCountryData('usa');
+btn.addEventListener('click', function() {
+    getCountryData('usa');
+});
+
+getCountryData('aksjdfsk'); //log shows cannot read property of undefined because the object doesn't exist so it can't pull data for it
