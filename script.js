@@ -1,4 +1,6 @@
 'use strict';
+/*
+
 const btn = document.querySelector('.btn-country');
 const countriesContainer = document.querySelector('.countries');
 
@@ -25,7 +27,6 @@ const renderCountry = function(data, className) {
         countriesContainer.insertAdjacentHTML('beforeend', html);
         countriesContainer.style.opacity = 1;
 }
-/*
 const getCountryAndNeighbor = function(country) {
     //AJAX call country 1
     const request = new XMLHttpRequest();
@@ -206,7 +207,6 @@ Promise.resolve('Resovled promise 2').then(res => {
 });
 
 console.log('Test end');
-*/
 
 //////////////////////////////////////////
 //Building promises
@@ -254,3 +254,93 @@ wait(1).then(() => {
 
 Promise.resolve('abc').then(x => console.log(x));
 Promise.reject(new Error('Problem')).catch(x => console.error(x));
+
+
+const getPosition = function() {
+    return new Promise(function(resolve, reject) {
+        //navigator.geolocation.getCurrentPosition(position => resolve(position), err => reject(err));
+        //Simpler way to write the same code
+        navigator.geolocation.getCurrentPosition(resolve, reject);
+    });
+};
+
+//getPosition().then(pos => console.log(pos));
+
+const whereAmI = function() {
+    getPosition().then(pos => {
+        const {latitude: lat, longitude: lng} = pos.coords;
+
+        return fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
+    })
+    .then(res => {
+        if(!res.ok) throw new Error(`Problem with geocoding ${res.status}`);
+        return res.json();
+    })
+    .then(data => {
+        console.log(data);
+        console.log(`You are in ${data.city}, ${data.country}`);
+
+        return fetch(`https://restcountries.com/v3.1/name/${data.country}`)
+    })
+    .then(res => {
+        if(!res.ok) {
+            throw new Error(`Country not found (${res.status})`)
+        }
+        return res.json();
+        })
+    .then(data => renderCountry(data[0]))
+    .catch(err => console.error(`${err.message} emoji`));
+};
+
+btn.addEventListener('click', whereAmI);
+*/
+
+////////////////////////////////////////////////////
+//Coding Challenge 2
+
+const imgContainer = document.querySelector('.images');
+
+const wait = function(seconds) {
+    return new Promise(function(resolve) {
+        setTimeout(resolve, seconds * 1000);
+    });
+};
+
+const createImage = function(imgPath) {
+    return new Promise(function(resolve, reject) {
+        const img = document.createElement('img');
+        img.src = imgPath;
+
+        img.addEventListener('load', function() {
+            imgContainer.append(img);
+            resolve(img);
+        });
+
+        img.addEventListener('error', function() {
+            reject(new Error('Image not found'));
+        });
+    });
+};
+
+let currentImg;
+
+createImage('img/img-1.jpg').then(img => {
+    currentImg = img;
+    console.log('Image 1 loaded');
+    return wait(2);
+})
+.then(() => {
+    currentImg.style.display = 'none';
+    return createImage('img/img-2.jpg');
+})
+.then(img => {
+    currentImg = img;
+    console.log('Image 2 loaded');
+    return wait(2);
+})
+.then(() => {
+    currentImg.style.display = 'none';
+    return createImage('img/img-3.jpg');
+})
+.catch(err => console.error(err));
+
