@@ -72,7 +72,6 @@ ShoppingCart2.addToCart('apple', 4);
 ShoppingCart2.addToCart('pizza', 2);
 console.log(ShoppingCart2);
 console.log(ShoppingCart2.shippingCost); //This does not work, log shows undefined
-*/
 
 /////////////////////////////////////////////////////
 //CommonJS Modules
@@ -84,3 +83,4 @@ export.addToCart = function(product, quantity) {
 
 //Import
 const {addToCart} = require('./shoppingCart.js')
+*/
