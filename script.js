@@ -1,5 +1,4 @@
 'use strict';
-/*
 
 const btn = document.querySelector('.btn-country');
 const countriesContainer = document.querySelector('.countries');
@@ -27,6 +26,8 @@ const renderCountry = function(data, className) {
         countriesContainer.insertAdjacentHTML('beforeend', html);
         countriesContainer.style.opacity = 1;
 }
+/*
+
 const getCountryAndNeighbor = function(country) {
     //AJAX call country 1
     const request = new XMLHttpRequest();
@@ -293,7 +294,6 @@ const whereAmI = function() {
 };
 
 btn.addEventListener('click', whereAmI);
-*/
 
 ////////////////////////////////////////////////////
 //Coding Challenge 2
@@ -343,4 +343,38 @@ createImage('img/img-1.jpg').then(img => {
     return createImage('img/img-3.jpg');
 })
 .catch(err => console.error(err));
+*/
 
+///////////////////////////////////////
+//Consuming promises with Async/Await
+
+const getPosition = function() {
+    return new Promise(function(resolve, reject) {
+        //navigator.geolocation.getCurrentPosition(position => resolve(position), err => reject(err));
+        //Simpler way to write the same code
+        navigator.geolocation.getCurrentPosition(resolve, reject);
+    });
+};
+
+const whereAmI = async function(country) {
+    //Geolocation
+    const pos = await getPosition();
+    const {latitude: lat, longitude: lng} = pos.coords;
+
+    //Reverse geocoding
+    const resGeo = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
+    const dataGeo = await resGeo.json();
+    console.log(dataGeo);
+
+    //Country data
+    //fetch(`https://restcountries.com/v3.1/name/${country}`).then(res => console.log(res));
+    //Same code as below but using async/await
+
+    const res = await fetch(`https://restcountries.com/v3.1/name/${dataGeo.country}`);
+    const data = await res.json();
+    console.log(data);
+    renderCountry(data[0]);
+};
+
+whereAmI();
+console.log('FIRST');
