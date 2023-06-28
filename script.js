@@ -1,5 +1,5 @@
 'use strict';
-
+/*
 const btn = document.querySelector('.btn-country');
 const countriesContainer = document.querySelector('.countries');
 
@@ -26,7 +26,7 @@ const renderCountry = function(data, className) {
         countriesContainer.insertAdjacentHTML('beforeend', html);
         countriesContainer.style.opacity = 1;
 }
-/*
+
 
 const getCountryAndNeighbor = function(country) {
     //AJAX call country 1
@@ -401,7 +401,6 @@ console.log('1: Will get location');
     }
     console.log('3: Finished getting location');
 })();
-*/
 
 /////////////////////////////////////////////
 //Running promises in parallel
@@ -429,3 +428,51 @@ const get3Countries = async function(c1, c2, c3) {
 };
 
 get3Countries('portugal', 'usa', 'canada');
+*/
+
+/////////////////////////////////////////
+//Other promise combinators - race, allSettled, and any
+
+const getJSON = function(url, errorMsg = 'Something went wrong') {
+    return fetch(url).then(response => {if(!response.ok) {
+        throw new Error(`${errorMsg} (${response.status})`)
+    }
+    return response.json();
+    });
+};
+
+//Promise.race
+(async function() {
+    const res = await Promise.race([getJSON(`https://restcountries.com/v3.1/name/italy`), getJSON(`https://restcountries.com/v3.1/name/greece`), getJSON(`https://restcountries.com/v3.1/name/portugal`)]);
+    console.log(res[0]);
+})();
+
+const timeout = function(sec) {
+    return new Promise(function(_, reject) {
+        setTimeout(function() {
+            reject(new Error('Request took too long!'));
+        }, sec * 1000);
+    });
+};
+
+Promise.race([getJSON(`https://restcountries.com/v3.1/name/italy`), timeout(0.01)]).then(res => console.log(res[0])).catch(err => console.error(err));
+
+//Promise.allSettled
+Promise.allSettled([
+    Promise.resolve('Success'),
+    Promise.reject('ERROR'),
+    Promise.resolve('Antoher success'),
+]).then(res => console.log(res));
+
+Promise.allSettled([
+    Promise.resolve('Success'),
+    Promise.reject('ERROR'),
+    Promise.resolve('Antoher success'),
+]).then(res => console.log(res)).catch(err => console.error(err));
+
+//Promise.any
+Promise.any([
+    Promise.resolve('Success'),
+    Promise.reject('ERROR'),
+    Promise.resolve('Antoher success'),
+]).then(res => console.log(res)).catch(err => console.error(err));
