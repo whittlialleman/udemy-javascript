@@ -9,6 +9,7 @@ console.log('Importing module');
 // import * as ShoppingCart from './shoppingCart.js';
 // ShoppingCart.addToCart('bread', 5);
 // console.log(ShoppingCart.totalPrice);
+*/
 
 import add, {cart} from './shoppingCart.js'; //this imports the unnamed function from shoppingCart.js
 add('pizzas', 2);
@@ -17,6 +18,7 @@ add('apples', 4);
 
 console.log(cart);
 
+/*
 ///////////////////////////////////////////////////
 //Top level await as of 2022 - no longer have to use await inside an async function
 // console.log('Start fetching');
@@ -85,7 +87,8 @@ export.addToCart = function(product, quantity) {
 const {addToCart} = require('./shoppingCart.js')
 */
 
-import cloneDeep from './node_modules/lodash-es/cloneDeep.js';
+// import cloneDeep from './node_modules/lodash-es/cloneDeep.js';
+import cloneDeep from 'lodash-es';
 
 const state = {
     cart: [
@@ -102,3 +105,7 @@ state.user.loggedIn = false;
 console.log(stateClone);
 
 console.log(stateDeepClone);
+
+if(module.hot) {
+    module.hot.accept()
+}
